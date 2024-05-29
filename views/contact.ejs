@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#{title}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/index" id="upp"> HOME</a></li>
+            <li><a href="" id="upp"> ABOUT US</a></li>
+            <li><a href="" id="upp"> SERVICES</a></li>
+            <li><a href="" id="upp"> CONTACT US</a></li>
+        </ul>
+    </nav>
+    <section class="bg">
+    <div class="cont1">
+             <h2 style="color: white;">FILL UP THE FORM</h2>  
+             <form action="/contact" method="POST">
+                <input type="text" name="name" placeholder="NAME" style="background-color: white;">
+                <input type="text" name="id" placeholder="ID" style="background-color: white;">
+                <input type="number" name="age" placeholder="AGE" style="background-color: white;">
+                <input type="text" name="batch" placeholder="BATCH" style="background-color: white;">
+                <label for="time"><b>Timing:</b></label>
+                <select name="timing" id="time" aria-placeholder="5-6AM" style="background-color: white;">
+                    <option value="5-6AM">5-6AM</option>
+                    <option value="6-7AM">6-7AM</option>
+                    <option value="7-8AM">7-8AM</option>
+                    <option value="5-6PM">5-6PM</option>
+                    <option value="6-7PM">6-7PM</option>
+                    <option value="7-8PM">7-8PM</option>
+                </select>
+                <button id="btn">SUBMIT</button>
+            </form>
+            <h3>Selected Time Slot: <span id="selected-time"></span></h3>
+            <h3>Slots Available: <span id="slots-available"></span></h3>
+    </div>
+</section>
+<script>
+    document.getElementById('time').addEventListener('change', function() {
+        var selectedTiming = this.value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/check-slots?timing=' + selectedTiming, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                document.getElementById('selected-time').textContent = selectedTiming;
+                document.getElementById('slots-available').textContent = response.slotsAvailable;
+            }
+        };
+        xhr.send();
+    });
+</script>
+</body>
+</html>

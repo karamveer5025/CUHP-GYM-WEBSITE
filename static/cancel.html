@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CANCEL MEMBERSHIP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #e9ecef; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            height: 100vh; 
+        }
+        .container {
+            width: 360px; 
+            padding: 30px; 
+            background-color: #fff;
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            text-align: center;
+        }
+        h1 {
+            color: #495057; 
+            margin-bottom: 24px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"],
+        input[type="password"] {
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 2px solid #ced4da; 
+            border-radius: 5px; 
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #28a745; 
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838; 
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cancel membership</h1>
+        <form action="/cancel-membership" method="post"> 
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="id" required>
+            <input type="submit" value="Cancel">
+        </form>
+    </div>
+</body>
+</html>

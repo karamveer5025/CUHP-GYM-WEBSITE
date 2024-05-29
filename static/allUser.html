@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>User List</h1>
+    <table id="usersTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Age</th>
+                <th>Batch</th>
+                <th>Timing</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+
+<script>
+    async function fetchUsers() {
+        try {
+            const response = await fetch("http://localhost:3000/send"); 
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const users = await response.json(); 
+
+            const tableBody = document.getElementById('usersTable').getElementsByTagName('tbody')[0];
+            users.forEach(user => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = user.name;
+                row.insertCell(1).textContent = user.id;
+                row.insertCell(2).textContent = user.age;
+                row.insertCell(3).textContent = user.batch;
+                row.insertCell(4).textContent = user.timing;
+            });
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchUsers);
+</script>
+
+ 
+</body>
+</html>
+
+
+
+
+
+
